@@ -1,3 +1,5 @@
 #!/bin/bash
 
 echo $JUJU_REMOTE_UNIT | sed -e 's:/:_:g' > primary_unit
+# Force a rewrite of the config with the new hostname.
+./hooks/config-changed

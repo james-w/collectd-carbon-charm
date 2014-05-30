@@ -5,7 +5,8 @@ PRIMARY_UNIT_FILE=primary_unit
 if [ -f "$PRIMARY_UNIT_FILE" ]; then
     PRIMARY_UNIT=$(cat primary_unit)
 else
-    PRIMARY_UNIT=$(hostname)
+    echo "No primary unit name yet, has the host relation been joined?"
+    exit 0
 fi
 HOST=$(config-get carbon_host)
 PORT=$(config-get carbon_port)
