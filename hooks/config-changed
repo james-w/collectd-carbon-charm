@@ -1,0 +1,19 @@
+#!/bin/bash
+# config-changed occurs everytime a new configuration value is updated (juju set)
+
+HOST=$(config-get carbon_host)
+PORT=$(config-get carbon_port)
+
+cat > /etc/collectd/collectd.conf.d/carbon.conf <<END
+<LoadPlugin "python">
+  Globals true
+</LoadPlugin>
+
+Import "carbon_writer"
+<Module carbon_writer>
+  LineReceiverHost "$HOST"
+  LineReceiverPort $PORT
+  DeriveCounters true
+  TypesDB "/usr/share/collectd/types.db"
+</Module>
+END

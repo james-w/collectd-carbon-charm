@@ -1,0 +1,11 @@
+name: collectd-carbon
+summary: Run collectd, send metrics to carbon
+maintainer: James Westby <james.westby@canonical.com>
+description: |
+  <Multi-line description here>
+categories:
+  - misc
+subordinate: true
+requires:
+  host:
+    interface: juju-info

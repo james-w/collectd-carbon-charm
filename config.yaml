@@ -1,0 +1,9 @@
+options:
+  carbon_host:
+    type: string
+    default: ""
+    description: "Host to send carbon metrics to."
+  carbon_port:
+    type: int
+    default: 2003
+    description: "Port to send carbon metrics to."
