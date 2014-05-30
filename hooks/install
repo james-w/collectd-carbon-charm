@@ -6,3 +6,6 @@
 # from github without installing git first.
 
 apt-get install -y collectd
+
+mkdir -p /var/lib/collectd-python
+cp -a files/carbon_writer.py /var/lib/collectd-python/

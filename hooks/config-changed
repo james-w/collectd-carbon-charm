@@ -823,13 +823,18 @@ Include "/etc/collectd/thresholds.conf"
   Globals true
 </LoadPlugin>
 
-Import "carbon_writer"
-<Module carbon_writer>
-  LineReceiverHost "$HOST"
-  LineReceiverPort $PORT
-  DeriveCounters true
-  TypesDB "/usr/share/collectd/types.db"
-</Module>
+<Plugin "python">
+    ModulePath "/var/lib/collectd-python/"
+
+    Import "carbon_writer"
+    <Module carbon_writer>
+      LineReceiverHost "$HOST"
+      LineReceiverPort $PORT
+      DeriveCounters true
+      TypesDB "/usr/share/collectd/types.db"
+    </Module>
+</Plugin>
+
 END
 
 service collectd restart
