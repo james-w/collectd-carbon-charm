@@ -9,3 +9,4 @@ subordinate: true
 requires:
   host:
     interface: juju-info
+    scope: container
