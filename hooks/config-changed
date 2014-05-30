@@ -1,6 +1,12 @@
 #!/bin/bash
 # config-changed occurs everytime a new configuration value is updated (juju set)
 
+PRIMARY_UNIT_FILE=primary_unit
+if [ -f "$PRIMARY_UNIT_FILE" ]; then
+    PRIMARY_UNIT=$(cat primary_unit)
+else
+    PRIMARY_UNIT=$(hostname)
+fi
 HOST=$(config-get carbon_host)
 PORT=$(config-get carbon_port)
 
@@ -13,8 +19,8 @@ cat > /etc/collectd/collectd.conf <<END
 # You should also read /usr/share/doc/collectd-core/README.Debian.plugins
 # before enabling any more plugins.
 
-#Hostname "localhost"
-FQDNLookup true
+Hostname "$PRIMARY_UNIT"
+#FQDNLookup true
 #BaseDir "/var/lib/collectd"
 #PluginDir "/usr/lib/collectd"
 #TypesDB "/usr/share/collectd/types.db" "/etc/collectd/my_types.db"
@@ -39,9 +45,9 @@ LoadPlugin syslog
 #LoadPlugin apache
 #LoadPlugin apcups
 #LoadPlugin ascent
-LoadPlugin battery
+#LoadPlugin battery
 #LoadPlugin bind
-#LoadPlugin conntrack
+LoadPlugin conntrack
 #LoadPlugin contextswitch
 LoadPlugin cpu
 #LoadPlugin cpufreq
@@ -101,6 +107,7 @@ LoadPlugin processes
 LoadPlugin swap
 #LoadPlugin table
 #LoadPlugin tail
+# TODO: Interesting, but requires configuration
 #LoadPlugin tcpconns
 #LoadPlugin teamspeak2
 #LoadPlugin ted

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo $JUJU_REMOTE_UNIT | sed -e 's:/:_:g' > primary_unit
